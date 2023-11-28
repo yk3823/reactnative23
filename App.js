@@ -1,80 +1,86 @@
-import { useState } from 'react';
-import { StyleSheet, View, FlatList, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import GoalItem from './components/GoalItem';
-import GoalInput from './components/GoalInput';
+import AboutScreen from './screens/AboutScreen'; // Update these paths as needed
+import AccountScreen from './screens/AccountScreen';
+import AppointmentScreen from './screens/AppointmentScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [modalIsVisible, setModalIsVisible] = useState(false);
-  const [courseGoals, setCourseGoals] = useState([]);
+  const [splashScreen, setSplashScreen] = useState(true);
 
-  function startAddGoalHandler() {
-    setModalIsVisible(true);
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplashScreen(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  function endAddGoalHandler() {
-    setModalIsVisible(false);
-  }
-
-  function addGoalHandler(enteredGoalText) {
-    setCourseGoals((currentCourseGoals) => [
-      ...currentCourseGoals,
-      { text: enteredGoalText, id: Math.random().toString() },
-    ]);
-    endAddGoalHandler();
-  }
-
-  function deleteGoalHandler(id) {
-    setCourseGoals((currentCourseGoals) => {
-      return currentCourseGoals.filter((goal) => goal.id !== id);
-    });
+  if (splashScreen) {
+    return (
+      <View style={styles.fullScreen}>
+        <Image
+          source={require('./assets/sara.jpg')}
+          style={styles.fullScreenImage}
+        />
+      </View>
+    );
   }
 
   return (
-    <>
+    <NavigationContainer>
       <StatusBar style="light" />
-      <View style={styles.appContainer}>
-        <Button
-          title="Add New Goal"
-          color="#a065ec"
-          onPress={startAddGoalHandler}
+      <Tab.Navigator>
+        <Tab.Screen
+          name="About"
+          component={AboutScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="information" color={color} size={size} />
+            ),
+          }}
         />
-        <GoalInput
-          visible={modalIsVisible}
-          onAddGoal={addGoalHandler}
-          onCancel={endAddGoalHandler}
+        <Tab.Screen
+          name="Appointment"
+          component={AppointmentScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="calendar-clock" color={color} size={size} />
+            ),
+          }}
         />
-        <View style={styles.goalsContainer}>
-          <FlatList
-            data={courseGoals}
-            renderItem={(itemData) => {
-              return (
-                <GoalItem
-                  text={itemData.item.text}
-                  id={itemData.item.id}
-                  onDeleteItem={deleteGoalHandler}
-                />
-              );
-            }}
-            keyExtractor={(item, index) => {
-              return item.id;
-            }}
-            alwaysBounceVertical={false}
-          />
-        </View>
-      </View>
-    </>
+        <Tab.Screen
+          name="Account"
+          component={AccountScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  appContainer: {
+  fullScreen: {
     flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 16,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  goalsContainer: {
-    flex: 5,
+  fullScreenImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
+  // Other styles can
+
 });
