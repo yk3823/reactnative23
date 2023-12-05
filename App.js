@@ -41,7 +41,7 @@ export default function App() {
           component={AboutScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="information" color={color} size={size} />
+              <MaterialCommunityIcons name="information" color={'#fcc3c6'} size={size} />
             ),
           }}
         />
@@ -50,7 +50,7 @@ export default function App() {
           component={AppointmentScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="calendar-clock" color={color} size={size} />
+              <MaterialCommunityIcons name="calendar-clock" color={'#fcc3c6'} size={size} />
             ),
           }}
         />
@@ -59,7 +59,7 @@ export default function App() {
           component={AccountScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={size} />
+              <MaterialCommunityIcons name="account" color={'#fcc3c6'} size={size} />
             ),
           }}
         />
