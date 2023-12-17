@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, Linking, Alert, Image, ScrollView, Modal } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, Linking, Alert, Image, Modal } from 'react-native';
 
 const address = "HaMeginim St 12, Gan Yavne";
 const googleMapsURL = `https://maps.app.goo.gl/oc5bjvAQgefsdhfD9`;
@@ -9,6 +9,7 @@ const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=HaMe
 const TikTokURL = 'https://www.tiktok.com/@sara__kenan?_t=8hw9vdrRijK&_r=1';
 const instagramURL = 'https://instagram.com/sara.keinan.nails?igshid=MzMyNGUyNmU2YQ==';
 const WhatsappURL = 'https://wa.link/zo2ahr';
+
 const openMap = (mapType) => {
     const url = mapType === 'googleMaps' ? googleMapsURL : wazeURL;
     Linking.canOpenURL(url).then(supported => {
@@ -42,6 +43,7 @@ const openInstagram = () => {
         }
     });
 };
+
 const openTikTok = () => {
     Linking.canOpenURL(TikTokURL).then(supported => {
         if (supported) {
@@ -51,6 +53,7 @@ const openTikTok = () => {
         }
     });
 };
+
 const openWhatsapp = () => {
     Linking.canOpenURL(WhatsappURL).then(supported => {
         if (supported) {
@@ -60,41 +63,14 @@ const openWhatsapp = () => {
         }
     });
 };
-const galleryImages = [
-    require('../assets/nails1.jpg'),
-    require('../assets/nails2.jpg'),
-    require('../assets/nails3.jpg'),
-    require('../assets/nails4.jpg'),
-    require('../assets/nails5.jpg'),
-    require('../assets/nails6.jpg'),
-    require('../assets/nails7.jpg'),
-
-    // Add more images as needed
-];
 
 const AboutScreen = () => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
-
-    const openImage = (image) => {
-        setSelectedImage(image);
-        setModalVisible(true);
-    };
-
     return (
         <ImageBackground
             source={require('../assets/saraup.jpeg')} // Update the path as needed
             style={styles.backgroundImage}
         >
-
             <View style={styles.overlay} />
-            <ScrollView style={styles.galleryContainer} horizontal>
-                {galleryImages.map((image, index) => (
-                    <TouchableOpacity key={index} onPress={() => openImage(image)}>
-                        <Image source={image} style={styles.galleryImage} />
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
             <View style={styles.contentContainer}>
                 <TouchableOpacity onPress={chooseMap} style={styles.mapContainer}>
                     <Image
@@ -121,30 +97,10 @@ const AboutScreen = () => {
                     />
                 </TouchableOpacity>
             </View>
-
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Image source={selectedImage} style={styles.fullSizeImage} />
-                        <TouchableOpacity
-                            style={styles.closeButton}
-                            onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text>סגור</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
         </ImageBackground>
     );
 };
+
 
 const styles = StyleSheet.create({
     backgroundImage: {
@@ -157,16 +113,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
     },
-    galleryContainer: {
-        flexDirection: 'row',
-        marginTop: 300,
-    },
-    galleryImage: {
-        width: 100,
-        height: 100,
-        borderRadius: 10,
-        marginRight: 10,
-    },
+
     contentContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -207,32 +154,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 22,
     },
-    modalView: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-    },
-    fullSizeImage: {
-        width: 300,
-        height: 300,
-        resizeMode: 'contain'
-    },
-    closeButton: {
-        backgroundColor: '#fddcdb',
-        borderRadius: 10,
-        padding: 10,
-        elevation: 1
-    }
+
 });
 
 export default AboutScreen;
