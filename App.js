@@ -3,13 +3,21 @@ import { StyleSheet, View, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import AboutScreen from './screens/AboutScreen'; // Update these paths as needed
 import AccountScreen from './screens/AccountScreen';
 import AppointmentScreen from './screens/AppointmentScreen';
-
+import FinalizeAppointmentScreen from './screens/FinalizeAppointmentScreen';
 const Tab = createBottomTabNavigator();
+const AppointmentStack = createNativeStackNavigator();
+
+<AppointmentStack.Navigator screenOptions={{ headerShown: false }}>
+  <AppointmentStack.Screen name="AppointmentDetails" component={AppointmentScreen} />
+  <AppointmentStack.Screen name="FinalizeAppointment" component={FinalizeAppointmentScreen} />
+</AppointmentStack.Navigator>
+
 
 export default function App() {
   const [splashScreen, setSplashScreen] = useState(true);
@@ -81,6 +89,4 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-
-
 });

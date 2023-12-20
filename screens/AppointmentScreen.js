@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Modal, FlatList } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Modal, FlatList, Button } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
+import FinalizeAppointmentScreen from '../screens/FinalizeAppointmentScreen'; // Adjust the path as necessary
+
 const galleryImages = [
     require('../assets/nails1.jpg'),
     require('../assets/nails2.jpg'),
@@ -64,7 +66,7 @@ const listData = [
 ];
 
 
-const AppointmentScreen = () => {
+const AppointmentScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedAvatars, setSelectedAvatars] = useState([]); // State to track selected avatars
@@ -83,6 +85,9 @@ const AppointmentScreen = () => {
 
     const isAvatarSelected = (id) => {
         return selectedAvatars.includes(id);
+    };
+    const handleContinue = () => {
+        navigation.navigate('FinalizeAppointmentScreen');
     };
 
     const renderItem = ({ item }) => (
@@ -151,6 +156,15 @@ const AppointmentScreen = () => {
                         </View>
                     </View>
                 </Modal>
+                <View style={styles.container}>
+                    {/* ... Your existing components ... */}
+                    <TouchableOpacity
+                        onPress={handleContinue}
+                        style={{ backgroundColor: '#000000', padding: 5, borderRadius: 101 }}
+                    >
+                        <Text style={{ color: 'white', textAlign: 'center' }}>המשיכי</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </ImageBackground>
     );
@@ -195,15 +209,15 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     galleryImage: {
-        width: 100,
-        height: 100,
+        width: 95,
+        height: 95,
         borderRadius: 10,
         marginRight: 10,
     },
     modalView: {
-        margin: 20,
+        margin: 50,
         backgroundColor: 'white',
-        borderRadius: 20,
+        borderRadius: 40,
         padding: 35,
         alignItems: 'center',
         shadowColor: '#000',
@@ -224,7 +238,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fddcdb',
         borderRadius: 10,
         padding: 10,
-        elevation: 1
+        elevation: 2
     },
     tableContainer: {
         marginTop: 10,
@@ -246,6 +260,8 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         marginTop: -70,
+        flexGrow: 10,
+
     },
     listItemContainer: {
         flexDirection: 'row',
@@ -277,6 +293,15 @@ const styles = StyleSheet.create({
     selectedAvatar: {
         borderColor: 'white',
         borderWidth: 6,
+    },
+    container: {
+        flex: 0,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        position: 'absolute', // Position the button absolutely
+        bottom: 20, // Distance from bottom
+        left: 20, // Distance from right
+        padding: 0, // Optional padding
     },
 
 

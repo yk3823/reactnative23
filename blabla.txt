@@ -1,0 +1,21 @@
+כדי לבטל את הכותרות שמופיעות נעשה:
+
+
+To Remove the Entire Header
+If you prefer to remove the entire header for the AppointmentDetails screen, you can set the headerShown option to false. Here's how:
+
+
+<AppointmentStack.Screen 
+  name="AppointmentDetails" 
+  component={AppointmentScreen} 
+  options={{ headerShown: false }}  // Hide the header
+/>
+To Apply Globally to All Screens in the Stack
+If you want to apply this change to all screens within a specific stack navigator, you can do it in the navigator's screenOptions:
+
+
+<AppointmentStack.Navigator screenOptions={{ headerShown: false }}>
+  <AppointmentStack.Screen name="AppointmentDetails" component={AppointmentScreen} />
+  <AppointmentStack.Screen name="FinalizeAppointment" component={FinalizeAppointmentScreen} />
+</AppointmentStack.Navigator>
+This will apply the headerShown: false option to all screens in the AppointmentStack.
