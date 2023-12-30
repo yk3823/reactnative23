@@ -6,6 +6,7 @@ import NewListingButton from "./NewListingButton";
 import AboutScreen from '../screens/AboutScreen';
 import AccountScreen from '../screens/AccountScreen';
 import AppointmentScreen from '../screens/AppointmentScreen';
+import AppointmentStackNavigator from './AppointmentStackNavigator'; // import the Stack Navigator
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ const AppNavigator = () => (
         />
         <Tab.Screen
             name="Appointment"
-            component={AppointmentScreen}
+            component={AppointmentStackNavigator}
             options={{
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="calendar-clock" color={color} size={size} />

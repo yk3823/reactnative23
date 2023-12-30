@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Modal, FlatList, Button } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
-import FinalizeAppointmentScreen from '../screens/FinalizeAppointmentScreen'; // Adjust the path as necessary
+import { createStackNavitor } from '@react-navigation/stack';
+import FinalizeAppointmentScreen from '../screens/FinalizeAppointmentScreen';
 
 const galleryImages = [
     require('../assets/nails1.jpg'),
@@ -87,7 +88,7 @@ const AppointmentScreen = ({ navigation }) => {
         return selectedAvatars.includes(id);
     };
     const handleContinue = () => {
-        navigation.navigate('FinalizeAppointmentScreen');
+        navigation.navigate('FinalizeAppointment');
     };
 
     const renderItem = ({ item }) => (
