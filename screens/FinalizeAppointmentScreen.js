@@ -55,7 +55,8 @@ const FinalizeAppointmentScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF0F5', // Light pink background
+        backgroundColor: '#FFF0F5',
+        paddingTop: 90,
     },
     header: {
         fontSize: 24,

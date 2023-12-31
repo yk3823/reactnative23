@@ -66,8 +66,9 @@ const openWhatsapp = () => {
 
 const AboutScreen = () => {
     return (
+
         <ImageBackground
-            source={require('../assets/saraup.jpeg')} // Update the path as needed
+            source={require('../assets/sara.jpg')} // Update the path as needed
             style={styles.backgroundImage}
         >
             <View style={styles.overlay} />
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: 50,
     },
     mapContainer: {
         position: 'absolute',

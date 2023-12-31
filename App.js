@@ -13,11 +13,15 @@ import FinalizeAppointmentScreen from './screens/FinalizeAppointmentScreen';
 const Tab = createBottomTabNavigator();
 const AppointmentStack = createNativeStackNavigator();
 
-<AppointmentStack.Navigator screenOptions={{ headerShown: false }}>
-  <AppointmentStack.Screen name="AppointmentDetails" component={AppointmentScreen} />
-  <AppointmentStack.Screen name="FinalizeAppointment" component={FinalizeAppointmentScreen} />
-</AppointmentStack.Navigator>
 
+function AppointmentStackNavigator() {
+  return (
+    <AppointmentStack.Navigator>
+      <AppointmentStack.Screen name="AppointmentScreen" component={AppointmentScreen} options={{ headerShown: false }} />
+      <AppointmentStack.Screen name="FinalizeAppointment" component={FinalizeAppointmentScreen} options={{ headerShown: false }} />
+    </AppointmentStack.Navigator>
+  );
+}
 
 export default function App() {
   const [splashScreen, setSplashScreen] = useState(true);
@@ -51,15 +55,19 @@ export default function App() {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="information" color={'#fcc3c6'} size={size} />
             ),
+            headerShown: false,
+
           }}
         />
         <Tab.Screen
           name="Appointment"
-          component={AppointmentScreen}
+          component={AppointmentStackNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="calendar-clock" color={'#fcc3c6'} size={size} />
             ),
+            headerShown: false,
+
           }}
         />
         <Tab.Screen
@@ -69,6 +77,8 @@ export default function App() {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" color={'#fcc3c6'} size={size} />
             ),
+            headerShown: false,
+
           }}
         />
       </Tab.Navigator>

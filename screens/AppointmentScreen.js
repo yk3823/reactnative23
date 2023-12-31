@@ -91,6 +91,7 @@ const AppointmentScreen = ({ navigation }) => {
         navigation.navigate('FinalizeAppointment');
     };
 
+
     const renderItem = ({ item }) => (
         <View style={styles.listItemContainer}>
             <View style={styles.nameSubtitleContainer}>
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
     contentContainer: {
         flex: 1,
         alignItems: 'center',
+        paddingTop: 70,
     },
     galleryTitle: {
         marginTop: 20,
